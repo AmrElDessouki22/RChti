@@ -46,7 +46,8 @@ checkuser('https://rchti.herokuapp.com/checkuser').then((data)=>
                     }
             })
         }else{
-            console.log(data.text());
+            location.href='/'
+            
             
         }
 
