@@ -11,7 +11,7 @@ var _id = ''
 image.addEventListener("change", handleFiles, false);
 function handleFiles() {
     formData.append('avatars',this.files[0])
-  changephoto('http://localhost:3000/avatar/me').then((data)=>
+  changephoto('https://rchti.herokuapp.com/avatar/me').then((data)=>
   {
       
       if(data.status == 200)
@@ -24,11 +24,11 @@ function handleFiles() {
       }
 
   })
-  setimage.src='http://localhost:3000/avatar/'+_id
+  setimage.src='https://rchti.herokuapp.com/avatar/'+_id
 
 }
 
-checkuser('http://localhost:3000/checkuser').then((data)=>
+checkuser('https://rchti.herokuapp.com/checkuser').then((data)=>
     {
         if(data.status == 200)
         {
@@ -39,7 +39,7 @@ checkuser('http://localhost:3000/checkuser').then((data)=>
                 email.value = data.email
                 _id = data._id
                 if(data.avatar){
-                    setimage.src='http://localhost:3000/avatar/'+_id
+                    setimage.src='https://rchti.herokuapp.com/avatar/'+_id
                     }
             })
         }else{
@@ -50,7 +50,7 @@ checkuser('http://localhost:3000/checkuser').then((data)=>
     })
 logout.addEventListener('click',myFunction)
 function myFunction(){
-    logout_('http://localhost:3000/logout').then((data)=>
+    logout_('https://rchti.herokuapp.com/logout').then((data)=>
     {
         console.log(document.cookie);
         

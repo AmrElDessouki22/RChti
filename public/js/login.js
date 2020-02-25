@@ -6,7 +6,7 @@ login.addEventListener('click',myFunction)
 function myFunction()
 {
     const body = {email:email.value,password:password.value}
-    checklogin('http://localhost:3000/login',body).then((data)=>
+    checklogin('https://rchti.herokuapp.com/login',body).then((data)=>
     {
         if(data.status == 200)
         {

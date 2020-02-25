@@ -8,7 +8,7 @@ const name = document.getElementById("name")
 const error = document.getElementById("error")
 console.log(document.cookie.split('=')[1]);
 
-checkuser('http://localhost:3000/checkuser',document.cookie.split('=')[1])
+checkuser('https://rchti.herokuapp.com/checkuser',document.cookie.split('=')[1])
     .then((data) => {
         console.log(data.status);
         
@@ -24,7 +24,7 @@ function myFunction(){
     if(password.value == repassword.value){
     const data =  { name:name.value,email:email.value
         ,password:password.value,username:username.value }
-    postData('http://localhost:3000/adduser', data)
+    postData('https://rchti.herokuapp.com/adduser', data)
     .then((data) => {
      if(data.status == 200)
      {
