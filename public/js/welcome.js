@@ -40,6 +40,9 @@ checkuser('https://rchti.herokuapp.com/checkuser').then((data)=>
                 _id = data._id
                 if(data.avatar){
                     setimage.src='https://rchti.herokuapp.com/avatar/'+_id
+                    }else
+                    {
+                        setimage.src= "https://gutscharity.org.uk/wp-content/uploads/2019/11/blank-profile-picture-973460_960_720.png"
                     }
             })
         }else{
