@@ -85,7 +85,7 @@ async function changephoto(url){
     })
     if(response.status == 200)
     {
-     return;   
+        return image_error.innerHTML = 'done successfully'
     }
     const text = await response.text()
     return image_error.innerHTML = text
