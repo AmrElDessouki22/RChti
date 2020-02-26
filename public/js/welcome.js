@@ -14,7 +14,7 @@ var _id = ''
 image.addEventListener("change", handleFiles, false);
 function handleFiles() {
     const image = this.files[0]
-    image_error.innerHTML = loading
+    image_error.innerHTML = 'loading'
    formData.append('avatars',image)
   changephoto(urlpro+'/avatar/me')
   setimage.src=urlpro+'/avatar/'+_id
