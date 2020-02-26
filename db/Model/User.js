@@ -1,15 +1,39 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const validator = require('validator')
 
  
 const UserSchema = new Schema({
-    name: { type: String},
+    name: { type: String,validate(value){
+        if(validator.isEmpty(value,{ ignore_whitespace:false }))
+        {
+            throw new Error("can't be empty")
+        }
+    }},
     age: { type: Number},
-    username: { type: String},
-    email: { type: String, required:true ,unique:true},
-    password: { type: String ,required:true},
+    username: { type: String , validate(value){
+        if(validator.isEmpty(value,{ ignore_whitespace:false }))
+        {
+            throw new Error("can't be empty")
+        }
+    }},
+    email: { type: String ,unique:true,validate(value)
+        {
+            if(!validator.isEmail(value))
+            {
+                throw new Error(' must be email')
+                
+            }
+        }},
+    password: { type: String ,validate(value){
+        if(!validator.isLength(value,{min:7}))
+        {
+            throw new Error('must be more than 7')
+        }
+        
+    }},
     phone: {type : Number},
     avatar:{type:Buffer}
     ,gender:{type:String},

@@ -4,6 +4,9 @@ const name_ = document.getElementById('name')
 const phone = document.getElementById('phone')
 const email = document.getElementById('email')
 const image = document.getElementById('image')
+const image_error = document.getElementById('error')
+const url = 'http://localhost:3000'
+const urlpro = 'https://rchti.herokuapp.com'
 const setimage = document.getElementById('setimagei')
 var formData = new FormData();
 var _id = ''
@@ -11,7 +14,7 @@ var _id = ''
 image.addEventListener("change", handleFiles, false);
 function handleFiles() {
     formData.append('avatars',this.files[0])
-  changephoto('https://rchti.herokuapp.com/avatar/me').then((data)=>
+  changephoto(urlpro+'/avatar/me').then((data)=>
   {
       
       if(data.status == 200)
@@ -24,11 +27,11 @@ function handleFiles() {
       }
 
   })
-  setimage.src='https://rchti.herokuapp.com/avatar/'+_id
+  setimage.src=urlpro+'/avatar/'+_id
 
 }
 
-checkuser('https://rchti.herokuapp.com/checkuser').then((data)=>
+checkuser(urlpro+'/checkuser').then((data)=>
     {
         if(data.status == 200)
         {
@@ -39,10 +42,10 @@ checkuser('https://rchti.herokuapp.com/checkuser').then((data)=>
                 email.value = data.email
                 _id = data._id
                 if(data.avatar){
-                    setimage.src='https://rchti.herokuapp.com/avatar/'+_id
+                    setimage.src=urlpro+'/avatar/'+_id
                     }else
                     {
-                        setimage.src= "https://gutscharity.org.uk/wp-content/uploads/2019/11/blank-profile-picture-973460_960_720.png"
+                   setimage.src= "https://gutscharity.org.uk/wp-content/uploads/2019/11/blank-profile-picture-973460_960_720.png"
                     }
             })
         }else{
@@ -54,7 +57,7 @@ checkuser('https://rchti.herokuapp.com/checkuser').then((data)=>
     })
 logout.addEventListener('click',myFunction)
 function myFunction(){
-    logout_('https://rchti.herokuapp.com/logout').then((data)=>
+    logout_(urlpro+'/logout').then((data)=>
     {
         console.log(document.cookie);
         
@@ -83,16 +86,17 @@ async function checkuser(url){
 }
 
 async function changephoto(url){
-    
     console.log(formData.get('avatars'))
     const response = await fetch(url, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       headers: {'Authorization':'Bearer '+document.cookie.split('=')[1]}
      ,body:formData
     })
-   
-    
-    return response;
+    if(response.status == 200)
+    {
+     return;   
+    }
+    return image_error.innerHTML = 'please upload image'
 }
 async function getphoto(url){
     const response = await fetch(url,{
