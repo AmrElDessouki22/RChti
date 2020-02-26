@@ -17,7 +17,6 @@ checkuser(urlpro+'/checkuser',document.cookie.split('=')[1])
      if(data.status == 200)
      {
          location.href = '/welcome'
-        
      }
     });
 signup.addEventListener("click", myFunction);

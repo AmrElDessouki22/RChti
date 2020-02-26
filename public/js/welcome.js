@@ -85,7 +85,8 @@ async function changephoto(url){
     {
      return;   
     }
-    return image_error.innerHTML = 'please upload image'
+    const text = await response.text()
+    return image_error.innerHTML = text
 }
 async function getphoto(url){
     const response = await fetch(url,{

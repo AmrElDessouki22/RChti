@@ -187,7 +187,11 @@ app.post('/avatar/me',auth,upload.single('avatars'),async(req,res)=>
         .resize({height:250,width: 250})
         .png()
         .toBuffer()
-  console.log(buffer);
+        if(req.file.size>1600000)
+        {
+            throw new Error("cant upload this file max size 1.6 MB")
+        }
+
   
   
         req.user.avatar = buffer
