@@ -191,9 +191,6 @@ app.post('/avatar/me',auth,upload.single('avatars'),async(req,res)=>
         {
             throw new Error("cant upload this file max size 1.6 MB")
         }
-
-  
-  
         req.user.avatar = buffer
         await req.user.save()
         res.status(200).send(req.user)
