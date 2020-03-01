@@ -1,7 +1,7 @@
 const multer  = require('multer')
 const upload = multer({limits:{ fieldSize:1600000} , fileFilter(req,file,cb)
 {
-    console.log(file);
+    
     
     if(!file.originalname.match(/\.(png|jpeg|jpg)$/))
     {

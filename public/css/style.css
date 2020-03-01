@@ -1,3 +1,13 @@
+.contact100-form-title {
+  display: block;
+  width: 100%;
+  font-family: Montserrat-Black;
+  font-size: 39px;
+  color: #333333;
+  line-height: 1.2;
+  text-align: center;
+  padding-bottom: 59px;
+}
 @font-face {
   font-family: 'icomoon';
   src: url("../fonts/icomoon/icomoon.eot?srf3rx");
@@ -11,6 +21,7 @@
 *	Edit this section
 *
 * ======================================================= */
+
 body {
   font-family: "Quicksand", Arial, sans-serif;
   font-weight: 400;

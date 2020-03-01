@@ -6,12 +6,13 @@ const jwt = require('jsonwebtoken')
  
 const UserSchema = new Schema({
     name: { type: String},
+    username:{type:String},
     age: { type: Number},
     username: { type: String},
-    email: { type: String, required:true ,unique:true},
+    id: { type: String, required:true ,unique:true},
     password: { type: String ,required:true},
     phone: {type : Number},
-    avtar:{type:Buffer},
+    avatar:{type:Buffer},
     accept:{type:String,ref:'Request'}
     ,gender:{type:String},
     location:{type:String},
@@ -38,12 +39,12 @@ UserSchema.methods.token = async function()
 
 
 }
-UserSchema.statics.checklogin = async (email , password)=>
+UserSchema.statics.checklogin = async (id , password)=>
 {
-    const findIt = await Mymodel.findOne({email:email})
+    const findIt = await Mymodel.findOne({id:id})
     if(!findIt)
     {
-        throw new Error('cant login email')
+        throw new Error('cant login ID')
     }
     const password_ = await findIt.password
     const compare = await bcrypt.compare(password,password_)

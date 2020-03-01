@@ -5,7 +5,6 @@ const authWorker = async(req,res,next)=>
     try{  
     const token = req.header('Authorization').replace('Bearer ','')
     const tokenDecode =  jwt.verify(token,'thisismytokenworker')
-
     const findIt = await worker.findOne({_id:tokenDecode.id})
     if(!findIt)
     {
@@ -15,8 +14,8 @@ const authWorker = async(req,res,next)=>
     req.token = token
     next()
     }catch(e)
-    {
-        res.send(e.message)
+    {        
+        res.status(404).send(e.message)
 
     }
 

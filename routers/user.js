@@ -144,12 +144,12 @@ app.post('/addrequest',auth,async(req,res)=>
 {
    
     try{
-        const request_ = await request({...req.body,owner:req.user._id}).save() 
-        res.send(request_)
+        await request({...req.body,owner:req.user._id}).save() 
+        res.status(200).send()
 
     }catch(e)
     {
-        res.send(e.message)
+        res.status(404).send(e.message)
     }
 },(error,res,next)=>
 {
@@ -160,7 +160,7 @@ app.get('',(req,res)=>
 {
     res.render('index')
 })
-app.get('/gettasks',auth,async(req,res)=>
+app.get('/getrequest',auth,async(req,res)=>
 {
    
     try{
@@ -176,12 +176,32 @@ app.get('/gettasks',auth,async(req,res)=>
     res.send(error.message)
 
 })
+app.get('/getprossesrequest',auth,async(req,res)=>
+{
+   
+    try{
+        const request_ = await req.user.populate({
+            path:'Request',
+            match:{
+                done:false
+            }
+        }).execPopulate()
+        res.status(200).send(request_.Request)
+
+    }catch(e)
+    {
+        res.status(404).send(e.message)
+    }
+},(error,res,next)=>
+{
+    res.send(error.message)
+
+})
+
 app.post('/avatar/me',auth,upload.single('avatars'),async(req,res)=>
 {
    
     try{
-        
-        
         const buffer = await sharp(req.file.buffer)
         .rotate()
         .resize({height:250,width: 250})
@@ -256,6 +276,14 @@ app.get('/login',(req,res)=>
 app.get('/welcome',(req,res)=>
 {
     res.render('welcome')
+})
+app.get('/requestrc',(req,res)=>
+{
+    res.render('requestrc')
+})
+app.get('/prossesrq',(req,res)=>
+{
+    res.render('showprossesrequest')
 })
 
 

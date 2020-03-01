@@ -1,26 +1,19 @@
 const logout = document.getElementById('logout')
 const name = document.getElementById('swe')
-const name_ = document.getElementById('name')
-const phone = document.getElementById('phone')
-const email = document.getElementById('email')
-const image = document.getElementById('image')
+const avarge_request = document.getElementById('avarge_request')
+const name_request = document.getElementById('name_request')
+const phone_request = document.getElementById('phone_request')
+const sendrequest = document.getElementById('sendrequest')
+const erorrsubmint = document.getElementById('erorrsubmint')
 const image_error = document.getElementById('error')
 const url = 'https://rchti.herokuapp.com'
 const urlpro = 'https://rchti.herokuapp.com'
 const setimage = document.getElementById('setimagei')
 var formData = new FormData();
 var _id = ''
+var date = new Date()
 
-image.addEventListener("change", handleFiles, false);
-function handleFiles() {
-    const image = this.files[0]
-    image_error.innerHTML = 'loading'
-   formData.append('avatars',image)
-  changephoto(urlpro+'/avatar/me')
-  setimage.src=urlpro+'/avatar/'+_id
-   
 
-}
 
 checkuser(urlpro+'/checkuser').then((data)=>
     {
@@ -28,9 +21,8 @@ checkuser(urlpro+'/checkuser').then((data)=>
         {
             data.json().then((data)=>
             {
+                name_request.value=data.name
                 name.innerHTML = data.username
-                name_.value = data.name
-                email.value = data.email
                 _id = data._id
                 if(data.avatar){
                     setimage.src=urlpro+'/avatar/'+_id
@@ -46,6 +38,8 @@ checkuser(urlpro+'/checkuser').then((data)=>
         }
 
     })
+    
+    
 logout.addEventListener('click',myFunction)
 function myFunction(){
     logout_(urlpro+'/logout').then((data)=>
@@ -58,6 +52,12 @@ function myFunction(){
         }
 
     })
+
+}
+sendrequest.addEventListener('click',sendrequest_)
+function sendrequest_(){
+    const body = {location:'30,30',phone:phone_request.value,average:avarge_request.value}
+    sendrequestfetch(urlpro+'/addrequest',body)
 
 }
 async function logout_(url)
@@ -76,19 +76,23 @@ async function checkuser(url){
     return response;
 }
 
-async function changephoto(url){
-    console.log(formData.get('avatars'))
-    const response = await fetch(url, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      headers: {'Authorization':'Bearer '+document.cookie.split('=')[1]}
-     ,body:formData
+async function sendrequestfetch(url,body)
+{
+    const response = await fetch(url,{
+        method:'POST',
+        headers: {'Content-Type': 'application/json','Authorization':'Bearer '+document.cookie.split('=')[1]},
+        body:JSON.stringify(body)
     })
-    if(response.status == 200)
+    
+    if(response.status== 200)
     {
-        return image_error.innerHTML = 'done successfully'
+        return location.href = 'welcome'
+      
     }
-    const text = await response.text()
-    return image_error.innerHTML = text
+    const error = await response.text()
+    
+    
+    return erorrsubmint.innerHTML= error
 }
 async function getphoto(url){
     const response = await fetch(url,{

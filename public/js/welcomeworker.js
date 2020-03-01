@@ -5,7 +5,7 @@ const phone = document.getElementById('phone')
 const email = document.getElementById('email')
 const image = document.getElementById('image')
 const image_error = document.getElementById('error')
-const url = 'https://rchti.herokuapp.com'
+const url = 'http://localhost:3000'
 const urlpro = 'https://rchti.herokuapp.com'
 const setimage = document.getElementById('setimagei')
 var formData = new FormData();
@@ -16,39 +16,13 @@ function handleFiles() {
     const image = this.files[0]
     image_error.innerHTML = 'loading'
    formData.append('avatars',image)
-  changephoto(urlpro+'/avatar/me')
-  setimage.src=urlpro+'/avatar/'+_id
-   
-
+  changephoto(url+'/avatarworker/me')
+  setimage.src=url+'/avatarworker/'+_id
 }
-
-checkuser(urlpro+'/checkuser').then((data)=>
-    {
-        if(data.status == 200)
-        {
-            data.json().then((data)=>
-            {
-                name.innerHTML = data.username
-                name_.value = data.name
-                email.value = data.email
-                _id = data._id
-                if(data.avatar){
-                    setimage.src=urlpro+'/avatar/'+_id
-                    }else
-                    {
-                   setimage.src= "https://gutscharity.org.uk/wp-content/uploads/2019/11/blank-profile-picture-973460_960_720.png"
-                    }
-            })
-        }else{
-            location.href='/'
-            
-            
-        }
-
-    })
+checkuser(url+'/checkuserworker')
 logout.addEventListener('click',myFunction)
 function myFunction(){
-    logout_(urlpro+'/logout').then((data)=>
+    logout_(url+'/logoutworker').then((data)=>
     {
         console.log(document.cookie);
         
@@ -73,7 +47,27 @@ async function checkuser(url){
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       headers: {'Content-Type': 'application/json','Authorization':'Bearer '+document.cookie.split('=')[1]}
     })
-    return response;
+    if(response.status == 200)
+    {
+        const jsonres = await response.json() 
+        name.innerHTML = jsonres.username
+        name_.value = jsonres.username
+        email.value = jsonres.id
+        _id = jsonres._id
+        if(jsonres.avatar){
+            url='http://localhost:3000'
+            setimage.src=url+'/avatarworker/'+_id
+            console.log(url+'/avatarworker/'+_id);
+            console.log(url);
+            
+            
+            }else
+            {
+           setimage.src= "https://gutscharity.org.uk/wp-content/uploads/2019/11/blank-profile-picture-973460_960_720.png"
+            }
+            return;
+    }
+    return location.href='/'
 }
 
 async function changephoto(url){

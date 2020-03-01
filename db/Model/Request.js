@@ -2,12 +2,12 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
-    owner: { type:String ,ref: 'User'},
-    location: { type : String},
+    owner: { type:String ,ref: 'User',required:true},
+    location:{type:String , required:true},
     worker:{type:String,ref:'Worker'},
-    done:false,
-    average: { type: Number }
-   
+    done:{type:Boolean,default: false},
+    average: { type: Number ,required:true},
+    phone:{type:String , required:true}
 },{timestamps:true})
 
 
