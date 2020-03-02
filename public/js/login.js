@@ -3,7 +3,7 @@ const email = document.getElementById('email')
 const password = document.getElementById('password')
 const loginvald = document.getElementById('loginvald')
 const url = 'http://localhost:3000'
-const urlpro = 'http://localhost:3000'
+const urlpro = 'https://rchti.herokuapp.com'
 
 checkuser(urlpro+'/checkuser',document.cookie.split('=')[1])
     .then((data) => {
