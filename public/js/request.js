@@ -58,11 +58,11 @@ sendrequest.addEventListener('click',sendrequest_)
 function sendrequest_(){
     if(!navigator.geolocation)
     {
-        return alert('geolocatioon is not supported by your browser')
+        return alert('geolocatioon is not supported by your browser can not send request from this browser')
     }
     navigator.geolocation.getCurrentPosition((postion)=>
     {
-        const location = postion.coords.longitude+','+postion.coords.latitude
+        const location = postion.coords.latitude+','+postion.coords.longitude
         const body = {location:location,phone:phone_request.value,average:avarge_request.value}
         sendrequestfetch(urlpro+'/addrequest',body)
         
