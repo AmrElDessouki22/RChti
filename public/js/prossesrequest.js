@@ -69,7 +69,7 @@ checkuser(urlpro+'/checkuser').then((data)=>
             }
             
             
-             nameList = '<li style="list-style-type: none; ">' + '<a1 href='+'www.google.com/map?q='+json[I].location.split(',')[0]+','+json[I].location.split(',')[1]+'>'+' see location on map </a>'+'</li>';
+             nameList = '<li style="list-style-type: none; ">' + '<a href='+'www.google.com/map?q='+json[I].location.split(',')[0]+','+json[I].location.split(',')[1]+'>'+' see location on map </a>'+'</li>';
              nameList += '<li style="list-style-type: none;">'+'<h1>' +' Average : ' +json[I].average + '</h1>'+'</h1>' +'</li>';
              nameList += '<li style="list-style-type: none;">'+'<h1>'+' phone : ' + json[I].phone+ '</h1>' + '</li>';
              nameList += '<li style="list-style-type: none;">'+'<h1>'+' Done : ' + json[I].done + '</h1>'+ '</li>';
