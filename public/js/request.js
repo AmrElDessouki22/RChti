@@ -56,8 +56,19 @@ function myFunction(){
 }
 sendrequest.addEventListener('click',sendrequest_)
 function sendrequest_(){
-    const body = {location:'30,30',phone:phone_request.value,average:avarge_request.value}
-    sendrequestfetch(urlpro+'/addrequest',body)
+    if(!navigator.geolocation)
+    {
+        return alert('geolocatioon is not supported by your browser')
+    }
+    navigator.geolocation.getCurrentPosition((postion)=>
+    {
+        const location = postion.coords.longitude+','+postion.coords.latitude
+        const body = {location:location,phone:phone_request.value,average:avarge_request.value}
+        sendrequestfetch(urlpro+'/addrequest',body)
+        
+
+    })
+    
 
 }
 async function logout_(url)
