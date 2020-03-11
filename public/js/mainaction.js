@@ -6,7 +6,7 @@ const repassword = document.getElementById("repassword")
 const username = document.getElementById("username")
 const name = document.getElementById("name")
 const error = document.getElementById("error")
-const url = 'http://localhost:3000'
+const url = 'https://rchti.herokuapp.com'
 const urlpro = 'https://rchti.herokuapp.com'
 console.log(document.cookie.split('=')[1]);
 

@@ -16,13 +16,13 @@ function handleFiles() {
     const image = this.files[0]
     image_error.innerHTML = 'loading'
    formData.append('avatars',image)
-  changephoto(url+'/avatarworker/me')
-  setimage.src=url+'/avatarworker/'+_id
+  changephoto(urlpro+'/avatarworker/me')
+  setimage.src=urlpro+'/avatarworker/'+_id
 }
-checkuser(url+'/checkuserworker')
+checkuser(urlpro+'/checkuserworker')
 logout.addEventListener('click',myFunction)
 function myFunction(){
-    logout_(url+'/logoutworker').then((data)=>
+    logout_(urlpro+'/logoutworker').then((data)=>
     {
         console.log(document.cookie);
         
@@ -55,10 +55,9 @@ async function checkuser(url){
         email.value = jsonres.id
         _id = jsonres._id
         if(jsonres.avatar){
-            url='http://localhost:3000'
+            url='https://rchti.herokuapp.com'
             setimage.src=url+'/avatarworker/'+_id
             console.log(url+'/avatarworker/'+_id);
-            console.log(url);
             
             
             }else
