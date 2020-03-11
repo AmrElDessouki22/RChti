@@ -197,6 +197,24 @@ app.get('/getprossesrequest',auth,async(req,res)=>
     res.send(error.message)
 
 })
+//////
+app.get('/workerprofile/:id',auth,async(req,res)=>
+{
+   
+    try{
+        const findit = await request.findById(req.params.id)
+         await findit.populate('worker').execPopulate()
+        res.status(200).send(findit.worker)
+
+    }catch(e)
+    {
+        res.status(404).send(e.message)
+    }
+},(error,res,next)=>
+{
+    res.send(error.message)
+
+})
 
 app.post('/avatar/me',auth,upload.single('avatars'),async(req,res)=>
 {

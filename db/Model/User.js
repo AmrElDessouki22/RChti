@@ -38,6 +38,7 @@ const UserSchema = new Schema({
     avatar:{type:Buffer}
     ,gender:{type:String},
     location:{type:String},
+    points:{type:Number},
     Token:[{token:{type:String}}]
 },{timestamps:true})
 UserSchema.virtual('Request',{

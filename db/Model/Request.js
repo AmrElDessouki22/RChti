@@ -7,6 +7,7 @@ const UserSchema = new Schema({
     worker:{type:String,ref:'Worker'},
     done:{type:Boolean,default: false},
     average: { type: Number ,required:true},
+    doneaverage:{type: Number},
     phone:{type:String , required:true}
 },{timestamps:true})
 

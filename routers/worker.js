@@ -4,12 +4,11 @@ const worker = require('../db/Model/Worker')
 const authworker = require('../middleware/authWorker')
 const requestes = require('../db/Model/Request')
 const upload = require('../src/multer')
+const user = require('../db/Model/User')
 const sharp = require('sharp')
 
 app.post('/addworker',async(req,res)=>
 {
-    
-    
     try{
         const worker_ = await worker(req.body).save()
         await worker_.token()
@@ -115,6 +114,43 @@ app.post('/logoutworkerall',authworker,async(req,res)=>
 {
     res.send(error.message)
 })
+///////////////////////////////////////////////////////////////
+app.get('/myrequestaccept',authworker,async (req,res)=>
+{
+    try{
+    const reqestworker = await requestes.find({worker:req.worker._id,done:false})
+    res.status(200).send(reqestworker)
+    }catch(e)
+    {
+        res.status(404).send(e)
+    }
+
+
+},(error,res,next)=>
+{
+    res.status(404).send(e)
+    
+
+})
+
+app.get('/userinfo/:id',authworker,async (req,res)=>
+{
+    try{
+    const reqestworker = await requestes.findById(req.params.id)
+    await reqestworker.populate('owner').execPopulate()
+    res.status(200).send(reqestworker.owner)
+    }catch(e)
+    {
+        res.status(404).send(e)
+    }
+
+
+},(error,res,next)=>
+{
+    res.status(404).send(e)
+    
+
+})
 app.get('/requestes',authworker,async(req,res)=>
 {
     
@@ -130,6 +166,7 @@ app.get('/requestes',authworker,async(req,res)=>
 {
     res.send(error.message)
 })
+
 app.post('/accept/request/:id',authworker,async(req,res)=>
 {
     
@@ -137,10 +174,10 @@ app.post('/accept/request/:id',authworker,async(req,res)=>
         const requestItems = await requestes.findOne({_id:req.params.id,done:false})
         requestItems.worker = req.worker._id
         await requestItems.save()
-        res.send(requestItems)
+        res.status(200).send(requestItems)
     }catch(e)
     {
-        res.send(e.message)
+        res.status(404).send(e.message)
     }
 
 },(error,res,next)=>
@@ -224,13 +261,80 @@ app.get('/avatarworker/:id',async(req,res)=>
     res.send(error.message)
 
 })
+//////////////////////////////////////////////////////////////////
+app.post('/donerequestworker/:id',authworker,async(req,res)=>
+{
+    try{
+        const request = await requestes.findById(req.params.id)
+        request.doneaverage = req.body.doneaverage
+        await request.save()
+        res.status(200).send()
+
+    }catch(e)
+    {
+        res.status(404).send(e.message)
+    }
+},(error,res,next)=>
+{
+    res.send(error.message)
+
+})
+//////////////// ////////////// ///
+app.post('/addpoints/:id',authworker,async(req,res)=>
+{
+   
+    
+    try{
+        const request = await requestes.findOne({_id:req.body.id,done:false,worker:req.worker._id,owner:req.params.id})
+        
+        if(request == [])
+        {
+            console.log(request);
+            
+            return res.status(404).send('not found request')
+        }
+        const user_ = await user.findById(req.params.id)
+        console.log(user_);
+        if(!user_.points)
+        {
+        user_.points = parseFloat(req.body.points)
+
+        }else{
+        user_.points = parseFloat(req.body.points) + parseFloat(user_.points)
+        }
+        request.done = true
+        await request.save()
+        await user_.save()
+        res.status(200).send()
+
+    }catch(e)
+    {
+        res.status(404).send(e.message)
+    }
+},(error,res,next)=>
+{
+    res.send(error.message)
+
+})
 app.get('/worker',(req,res)=>
 {
     res.render('workerLogin')
 })
+
 app.get('/welcomeworker',(req,res)=>
 {
     res.render('welcomeworker')
 })
-
+app.get('/workerrequest',(req,res)=>
+{
+    res.render('workerrquest')
+})
+app.get('/workerproccessreq',(req,res)=>
+{
+    res.render('workerproccesrequest')
+})
+app.get('/doneform',(req,res)=>
+{
+    res.render('doneform')
+})
 module.exports = app
