@@ -2,7 +2,7 @@ const login = document.getElementById('login')
 const email = document.getElementById('email')
 const password = document.getElementById('password')
 const loginvald = document.getElementById('loginvald')
-const url = 'http://localhost:3000'
+const url = 'https://rchti.herokuapp.com'
 const urlpro = 'https://rchti.herokuapp.com'
 
 checkuser(urlpro+'/checkuser',document.cookie.split('=')[1])
@@ -17,6 +17,8 @@ checkuser(urlpro+'/checkuser',document.cookie.split('=')[1])
 login.addEventListener('click',myFunction)
 function myFunction()
 {
+ console.log('hi');
+ 
     const body = {email:email.value,password:password.value}
     checklogin(urlpro+'/login',body)
     
