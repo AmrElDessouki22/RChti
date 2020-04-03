@@ -25,13 +25,11 @@ async function checkuser(url){
             if(data.avatar){
                 setimage.src=urlpro+'/avatar/'+_id
                 imageop = urlpro+'/avatar/'+_id
-                getrequestsx(urlpro+'/getprossesrequest',imgy,name_)
-            
-                
                 }else
                 {
                setimage.src= "https://gutscharity.org.uk/wp-content/uploads/2019/11/blank-profile-picture-973460_960_720.png"
                 }
+                getrequestsx(urlpro+'/getprossesrequest',imgy,name_)
         
     }else{
        return location.href = '/'
