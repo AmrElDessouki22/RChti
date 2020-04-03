@@ -6,7 +6,6 @@ const routersUser = require('./routers/user')
 const routersWorker = require('./routers/worker')
 const app = express()
 const PORT = process.env.PORT || 3000
-const hbs = require('hbs')
 const static = path.join(__dirname,'./public')
 const views = path.join(__dirname,'./template/views')
 app.set('view engine', 'hbs');

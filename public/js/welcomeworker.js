@@ -1,11 +1,7 @@
 const logout = document.getElementById('logout')
-const name = document.getElementById('swe')
 const name_ = document.getElementById('name')
-const phone = document.getElementById('phone')
-const email = document.getElementById('email')
 const image = document.getElementById('image')
-const image_error = document.getElementById('error')
-const url = 'http://localhost:3000'
+const url = 'https://rchti.herokuapp.com'
 const urlpro = 'https://rchti.herokuapp.com'
 const setimage = document.getElementById('setimagei')
 var formData = new FormData();
@@ -14,7 +10,7 @@ var _id = ''
 image.addEventListener("change", handleFiles, false);
 function handleFiles() {
     const image = this.files[0]
-    image_error.innerHTML = 'loading'
+    alert( 'loading')
    formData.append('avatars',image)
   changephoto(urlpro+'/avatarworker/me')
   setimage.src=urlpro+'/avatarworker/'+_id
@@ -50,11 +46,11 @@ async function checkuser(url){
     if(response.status == 200)
     {
         const jsonres = await response.json() 
-        name.innerHTML = jsonres.username
-        name_.value = jsonres.username
-        email.value = jsonres.id
+        name_.innerHTML = jsonres.username
         _id = jsonres._id
         if(jsonres.avatar){
+            //http://localhost:3000
+            //https://rchti.herokuapp.com
             url='https://rchti.herokuapp.com'
             setimage.src=url+'/avatarworker/'+_id
             console.log(url+'/avatarworker/'+_id);
@@ -78,10 +74,10 @@ async function changephoto(url){
     })
     if(response.status == 200)
     {
-        return image_error.innerHTML = 'done successfully'
+        return alert('done successfully')
     }
     const text = await response.text()
-    return image_error.innerHTML = text
+    return alert(text)
 }
 async function getphoto(url){
     const response = await fetch(url,{

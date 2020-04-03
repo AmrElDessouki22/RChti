@@ -1,0 +1,65 @@
+body
+{
+  background-image: linear-gradient(rgba(27, 177, 67, 0.2),rgba(27, 177, 67, 0.2)),url("../images/construction-646914_1920.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: 'Lalezar', cursive;
+  margin: 0;
+  padding: 0;
+}
+section
+{
+  border-radius: 10px;
+  text-align: center;
+  margin-left: auto;
+   margin-right: auto;
+   margin-top: 10%;
+  background-color: #ffff;
+  opacity: 0.9;
+  width: 50%;
+  height: 50%;
+}
+form{
+  padding: 3%;
+  font-size: 30px;
+  text-align: center;
+  width: 100%;
+  text-align: center;
+
+}
+form h1
+{
+  color: #008000;
+}
+form input[type=text]
+{
+  font-family: 'Lalezar', cursive;
+  font-size: 20px;
+  width: 50%;
+  margin: 3% auto;
+  color: #008000;
+  border: none;
+  border-bottom: 1px solid #008000 ;
+  display: block;
+}
+form input[type=text]::placeholder
+{
+  color: #008000;
+}
+form input[type=button]
+{
+  font-family: 'Lalezar', cursive;
+  font-size: 20px;
+  background-color: #008000;
+  color: #fff;
+  margin: 0 auto 10px;
+  width: 50%;
+  display: block;
+  border-radius: 2px;
+  height: 50px;
+}
+form a{
+  font-size: 20px;
+  color: #008000;
+  text-decoration: none;
+}

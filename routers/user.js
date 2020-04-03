@@ -271,7 +271,9 @@ app.get('/checkuser',auth,async(req,res)=>
     try{
         if(req.user)
         {
-            res.status(200).send(req.user)
+            return res.status(200).send(req.user)
+        }else{
+        return res.status(404).send('error')
         }
 
     }catch(e)
@@ -283,6 +285,31 @@ app.get('/checkuser',auth,async(req,res)=>
     res.status(404).send(error.message)
 
 })
+app.get('/doneuser',auth,async(req,res)=>
+{
+    
+   
+    try{
+        const dones = await request.find({owner:req.user._id})
+        
+        if(dones == [])
+        {
+            return res.send(404).send('cant found done request')
+        }
+        
+        return res.status(200).send(dones)
+        
+
+    }catch(e)
+    {
+        res.status(404).send(e.message)
+    }
+},(error,res,next)=>
+{
+    res.status(404).send(error.message)
+
+})
+
 app.get('',(req,res)=>
 {
     res.render('index')
@@ -302,6 +329,10 @@ app.get('/requestrc',(req,res)=>
 app.get('/prossesrq',(req,res)=>
 {
     res.render('showprossesrequest')
+})
+app.get('/doneusewr',(req,res)=>
+{
+    res.render('donepageuser')
 })
 
 

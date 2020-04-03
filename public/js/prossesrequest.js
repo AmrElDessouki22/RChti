@@ -1,37 +1,51 @@
-const logout = document.getElementById('logout')
-const name = document.getElementById('swe')
-const setimage = document.getElementById('setimagei')
-const colorlib = document.getElementById('colorlib-main')
-const url = 'https://rchti.herokuapp.com'
-const urlpro = 'https://rchti.herokuapp.com'
+
+
+
+const colorlib = document.getElementById('sectianola')
 const h1Color = 'style="color: white;"'
-
-checkuser(urlpro+'/checkuser').then((data)=>
-    {
-        if(data.status == 200)
-        {
-            data.json().then((data)=>
-            {
-                
-                name.innerHTML = data.username
-                _id = data._id
-                if(data.avatar){
-                    setimage.src=urlpro+'/avatar/'+_id
-                    }else
-                    {
-                   setimage.src= "https://gutscharity.org.uk/wp-content/uploads/2019/11/blank-profile-picture-973460_960_720.png"
-                    }
-            })
-        }else{
-            location.href='/'
-            
-            
-        }
-
+var imageop;
+var name_oo;
+console.log(urlpro);
+checkuser(urlpro+'/checkuser')
+async function checkuser(url){
+    const response = await fetch(url, {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      headers: {'Content-Type': 'application/json','Authorization':'Bearer '+document.cookie.split('=')[1]}
     })
-    getrequests(urlpro+'/getprossesrequest')
 
-    async function getrequests(url)
+    
+    const data = await response.json()
+    
+    if(response.status == 200)
+    {
+            name_.innerHTML = data.username
+            name_oo = data.username
+         
+            
+            _id = data._id
+            if(data.avatar){
+                setimage.src=urlpro+'/avatar/'+_id
+                imageop = urlpro+'/avatar/'+_id
+                getrequests(urlpro+'/getprossesrequest',imgy,name_)
+            
+                
+                }else
+                {
+               setimage.src= "https://gutscharity.org.uk/wp-content/uploads/2019/11/blank-profile-picture-973460_960_720.png"
+                }
+        
+    }else{
+       return location.href = '/'
+       
+        
+        
+        
+    }
+    
+}
+
+
+    async function getrequests(url,imgy,name_)
     {
         const response = await fetch(url,{
             method:'GET',
@@ -39,53 +53,56 @@ checkuser(urlpro+'/checkuser').then((data)=>
         
         })
         if(response.status == 200)
-        {
-            return setrequest(await response.json())
+        { 
+            return setrequest(await response.json(),imgy,name_)
         }
 
-        return console.log(await response.text());
+        return alert(await response.text())
         
     }
-    async function checkuser(url){
-        const response = await fetch(url, {
-          method: 'GET', // *GET, POST, PUT, DELETE, etc.
-          headers: {'Content-Type': 'application/json','Authorization':'Bearer '+document.cookie.split('=')[1]}
-        })
-        return response;
-    }
-     async function setrequest(json){
-        
+   
+     async function setrequest(json,imgy,name_){
+         console.log(json);
+         var IMAGO = 'src='+imgy;
         
         for (var I = 0; I < json.length; I++)
         { 
+            console.log('i');
             
-            var worker 
-            
-            
-            
-             nameList = '<li style="list-style-type: none; ">' + '<a href='+'https://www.google.com/maps?q='+json[I].location.split(',')[0]+','+json[I].location.split(',')[1]+'>'+' see location on map </a>'+'</li>';
-             nameList += '<li style="list-style-type: none;">'+'<h1>' +' Average : ' +json[I].average + '</h1>'+'</h1>' +'</li>';
-             nameList += '<li style="list-style-type: none;">'+'<h1>'+' phone : ' + json[I].phone+ '</h1>' + '</li>';
-             nameList += '<li style="list-style-type: none;">'+'<h1>'+' Done : ' + json[I].done + '</h1>'+ '</li>';
+            var d = new Date(json[I].createdAt);
+            var u ;
+            var worker             
              if(json[I].worker == undefined )
             {
-                worker = 'Searching for one'
-                nameList += '<li style="list-style-type: none;">'+'<h1>'+' Worker : ' + worker + '</h1>'+ '</li>';
+                console.log('i');
+                
+                worker = 'Searching for worker'
+                 u ="<section>"+"<section>"+'<img class="image" '+ IMAGO+'>'+
+            '</section><section><h1>'+name_oo+'</h1><div><label>Date : </label><label> '+d.toLocaleString()+'</label>'+
+                '<a href='+'https://www.google.com/maps?q='+json[I].location.split(',')[0]+','+json[I].location.split(',')[1]+'>  <input type="button" name="" value="Location"></a></div><div class="more-info"><h6>'+worker+'</h6>'+
+                '<a href="#">More Info</a><a href="#">Cancel</a></div></section>'+"</section>"
 
 
             }else
             {
-                worker = json[I].worker
-                nameList += '<li style="list-style-type: none;">'+'<h1>'+' Worker name : ' + ( await fun(json[I]._id)).name + '</h1>'+ '</li>';
-                nameList += '<li style="list-style-type: none;">'+'<h1>'+' Worker phone : ' + ( await fun(json[I]._id)).phone + '</h1>'+ '</li>';
-                nameList += '<li style="list-style-type: none;">'+'<img src="'+urlpro+'/avatarworker/'+( await fun(json[I]._id)).id +'" >'+ '</li>';
+                console.log('ii');
+                const IMAGO = "src="+imgy+"";
+                
+                worker = 'wroker work on it'
+                 u =  "<section>"+
+                "<section>"+
+                  '<img class="image" '+ IMAGO+'>'+
+                '</section><section><h1>'+name_oo+'</h1><div><label>Date : </label><label> '+d.toLocaleString()+'</label>'+
+                    '<a href='+'https://www.google.com/maps?q='+json[I].location.split(',')[0]+','+json[I].location.split(',')[1]+'>  <input type="button" name="" value="Location"></a></div><div class="more-info"><h6>'+worker+'</h6>'+
+                    '<a href="#">More Info</a><a href="#">Cancel</a></div></section>'+"</section>"
+               
 
             }
             
+    
             
             
-             nameList += '<li style="list-style-type: none;">'+'<h1>'+'ـــــــــــــ'+ '</h1>'+ '</li>';
-             colorlib.innerHTML +='<div class="hire">'+ '<div class="hire">'+nameList+'</div>'+'</div>';
+             colorlib.innerHTML +=u;
              
         }
 

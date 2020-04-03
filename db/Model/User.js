@@ -34,7 +34,12 @@ const UserSchema = new Schema({
         }
         
     }},
-    phone: {type : Number},
+    phone: {type : String , validate(value){
+        if(validator.isEmpty(value,{ignore_whitespace:false}))
+        {
+            throw new Error("phone can't be empty")
+        }
+    }},
     avatar:{type:Buffer}
     ,gender:{type:String},
     location:{type:String},

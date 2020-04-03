@@ -1,11 +1,5 @@
-const logout = document.getElementById('logout')
-const name = document.getElementById('swe')
-const setimage = document.getElementById('setimagei')
 const template = document.getElementById('template')
-const requesttemplate = document.getElementById('request-template').innerHTML
-const url = 'https://rchti.herokuapp.com'
-const urlpro = 'https://rchti.herokuapp.com'
-const h1Color = 'style="color: white;"'
+
 
 checkuser(urlpro+'/checkuserworker').then((data)=>
     {
@@ -34,6 +28,7 @@ checkuser(urlpro+'/checkuserworker').then((data)=>
 
     async function getrequests(url)
     {
+        
         const response = await fetch(url,{
             method:'GET',
             headers: {'Content-Type': 'application/json','Authorization':'Bearer '+document.cookie.split('=')[1]}
@@ -41,8 +36,9 @@ checkuser(urlpro+'/checkuserworker').then((data)=>
         })
         if(response.status == 200)
         {
+            
             json = await response.json()
-             return setrequest(json)
+             return await setrequestt(json)
         }
 
         return console.log(await response.text());
@@ -55,24 +51,17 @@ checkuser(urlpro+'/checkuserworker').then((data)=>
         })
         return response;
     }
-    function setrequest(){
-       
+   async function setrequestt(){
         for (var I = 0; I < json.length; I++)
         { 
-            var create = json[I].createdAt 
-            console.log(create);
-            
-             nameList = '<li style="list-style-type: none; ">' + '<a href='+'https://www.google.com/maps?q='+json[I].location.split(',')[0]+','+json[I].location.split(',')[1]+'>'+' see location on map </a>'+'</li>';
-             nameList += '<li style="list-style-type: none;">'+'<h1>' +' Average : ' +json[I].average + '</h1>'+'</h1>' +'</li>';
-             nameList += '<li style="list-style-type: none;">'+'<h1>'+' phone : ' + json[I].phone+ '</h1>' + '</li>';
-             nameList += '<li style="list-style-type: none;">'+'<h1>'+' Done : ' + json[I].done + '</h1>'+ '</li>';
-             nameList += '<li style="list-style-type: none;">'+'<a onclick="yourFunc('+ [I] +');"'+'>'+' Accept '+ '</a>'+ '</li>';
-             nameList += '<li style="list-style-type: none;">'+'<h1>'+'ـــــــــــــ'+ '</h1>'+ '</li>';
-             
-             template.innerHTML +='<div class="hire">'+ '<div class="hire">'+nameList+'</div>'+'</div>';
-             console.log(json[I] );
-             
-             
+            const jsonesta = await getuserinfo(json[I].owner);
+            const userimage = 'src='+urlpro+'/avatar/'+json[I].owner
+            var d = new Date(json[I].createdAt);
+            const u = '<section><section><img class="image" '+userimage+' alt="user profile pic"></section>'+
+            '<section ><h1>'+ jsonesta.name +'</h1><div ><label>Date : </label><label>'+d.toLocaleString()+'</label>'+
+            '<a onclick="yourFunc('+ [I] +');"'+'><input  type="button" name="" value="Accept"></a></div><div class="more-info">'+
+             '<h6>User wait for Worker</h6><a href="#">More Info</a><a href='+'https://www.google.com/maps?q='+json[I].location.split(',')[0]+','+json[I].location.split(',')[1]+'>Location</a></div></section></section>'
+             template.innerHTML += u;
         }
          
         
@@ -92,6 +81,8 @@ checkuser(urlpro+'/checkuserworker').then((data)=>
         })
         if(response.status == 200)
         {
+          
+            
             return location.href = '/welcomeworker'
         }
     
@@ -100,4 +91,31 @@ checkuser(urlpro+'/checkuserworker').then((data)=>
         console.log(e.message);
         
     }
+   }
+   async function getuserinfo(owner)
+   {
+       try{
+       console.log(owner);
+       
+       const body = JSON.stringify({owner})
+       const response = await fetch(urlpro+'/getinfouser',
+       {
+           method:'POST',
+           headers:{'Content-Type':'application/json','Authorization':'Bearer '+document.cookie.split('=')[1]},
+           body:body
+       })
+       if(response.status == 200)
+       {   
+           
+           return await response.json()
+       }
+       
+       return console.log(await response.text());
+    }catch(e)
+    {
+        console.log(e.message);
+        
+    }
+       
+       
    }

@@ -3,7 +3,7 @@ const email = document.getElementById('email')
 const password = document.getElementById('password')
 const loginvald = document.getElementById('loginvald')
 const url = 'https://rchti.herokuapp.com'
-const urlpro = 'https://rchti.herokuapp.com'
+const urlpro = 'http://localhost:3000'
 
 checkuser(urlpro+'/checkuser',document.cookie.split('=')[1])
     .then((data) => {
@@ -42,7 +42,7 @@ async function checklogin(url,body)
         }  
 
     const error = await response.text()
-    return loginvald.innerHTML = error    
+    return alert(error)  
 
     
     

@@ -1,0 +1,88 @@
+body{
+  display: flex;
+  font-family: 'Lalezar', cursive;
+  margin: 0;
+  padding: 0;
+}
+#section1{
+  width: 50%;
+  height: 700px;
+  background-image:linear-gradient(rgba(27, 177, 67, 0.4),rgba(27, 177, 67, 0.4)), url("../images/nature-4202702_1920.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  text-align: center;
+  height: 100%;
+
+}
+#section2{
+  width: 50%;
+  height: 100%;
+
+
+}
+#section1 h1{
+  margin: 50% auto;
+  width: 100%;
+  font-size: 70px;
+  color: #fff;
+
+}
+#section1 img{
+  margin: 0 2% 0;
+}
+form{
+  font-size: 30px;
+  text-align: center;
+  width: 100%;
+
+}
+form h1
+{
+  color: #008000;
+}
+
+form input{
+  width: 500px;
+
+}
+.input-line{
+
+}
+form input[type=text],input[type=number]
+{
+  margin: 5% auto;
+  font-size: 20px;
+  height: 30px;
+  margin-left: 15px;
+  text-decoration: none;
+  border: none;
+  border-bottom: 1px solid #000000;
+  border-color: #008000;
+  color: #008000;
+}
+form input[type=text]::placeholder,input[type=number]::placeholder
+{
+  color:  #008000;
+}
+.button-div{
+margin-top: 2%;
+
+}
+.button-div input:first-child
+{
+  background-color:  #008000;
+  color: #fff;
+  border-radius: 5px;
+  height: 50px;
+  margin: 5%;
+}
+.button-div input:last-child
+{
+  background-color:  #fff;
+  color: #008000;
+  border-radius: 5px;
+  border-color: #008000 #008000;
+
+  height: 50px;
+}

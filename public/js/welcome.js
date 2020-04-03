@@ -1,51 +1,32 @@
 const logout = document.getElementById('logout')
-const name = document.getElementById('swe')
 const name_ = document.getElementById('name')
 const phone = document.getElementById('phone')
-const email = document.getElementById('email')
 const image = document.getElementById('image')
-const image_error = document.getElementById('error')
 const url = 'https://rchti.herokuapp.com'
 const urlpro = 'https://rchti.herokuapp.com'
 const setimage = document.getElementById('setimagei')
+const setimage2 = document.getElementById('setimagei2')
+const setimage3 = document.getElementById('setimagei3')
+var imgy;
 var formData = new FormData();
 var _id = ''
 
-image.addEventListener("change", handleFiles, false);
+image.addEventListener('change', handleFiles, false);
 function handleFiles() {
+    console.log('hi');
+    
     const image = this.files[0]
-    image_error.innerHTML = 'loading'
+    alert('loading')
    formData.append('avatars',image)
   changephoto(urlpro+'/avatar/me')
   setimage.src=urlpro+'/avatar/'+_id
+ 
    
 
 }
+console.log('sadsada');
 
-checkuser(urlpro+'/checkuser').then((data)=>
-    {
-        if(data.status == 200)
-        {
-            data.json().then((data)=>
-            {
-                name.innerHTML = data.username
-                name_.value = data.name
-                email.value = data.email
-                _id = data._id
-                if(data.avatar){
-                    setimage.src=urlpro+'/avatar/'+_id
-                    }else
-                    {
-                   setimage.src= "https://gutscharity.org.uk/wp-content/uploads/2019/11/blank-profile-picture-973460_960_720.png"
-                    }
-            })
-        }else{
-            location.href='/'
-            
-            
-        }
-
-    })
+checkuser(urlpro+'/checkuser')
 logout.addEventListener('click',myFunction)
 function myFunction(){
     logout_(urlpro+'/logout').then((data)=>
@@ -73,7 +54,29 @@ async function checkuser(url){
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       headers: {'Content-Type': 'application/json','Authorization':'Bearer '+document.cookie.split('=')[1]}
     })
-    return response;
+    const data = await response.json()
+    if(response.status == 200)
+    {
+            name_.innerHTML = data.username
+            _id = data._id
+            if(data.avatar){
+                setimage.src=urlpro+'/avatar/'+_id
+                imgy = urlpro+'/avatar/'+_id
+                
+                
+                }else
+                {
+               setimage.src= "https://gutscharity.org.uk/wp-content/uploads/2019/11/blank-profile-picture-973460_960_720.png"
+                }
+        
+    }else{
+       return location.href = '/'
+       
+        
+        
+        
+    }
+    
 }
 
 async function changephoto(url){
@@ -85,10 +88,10 @@ async function changephoto(url){
     })
     if(response.status == 200)
     {
-        return image_error.innerHTML = 'done successfully'
+        return alert('done successfully')
     }
     const text = await response.text()
-    return image_error.innerHTML = text
+    return alert(text)
 }
 async function getphoto(url){
     const response = await fetch(url,{
@@ -97,3 +100,4 @@ async function getphoto(url){
     })
     return response
 }
+

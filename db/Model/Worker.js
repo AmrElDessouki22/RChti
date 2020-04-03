@@ -44,13 +44,13 @@ UserSchema.statics.checklogin = async (id , password)=>
     const findIt = await Mymodel.findOne({id:id})
     if(!findIt)
     {
-        throw new Error('cant login ID')
+        throw new Error('cant login ')
     }
     const password_ = await findIt.password
     const compare = await bcrypt.compare(password,password_)
     if(!compare)
     {
-        throw new Error('cant login password')
+        throw new Error('cant login ')
     }
     return findIt
 

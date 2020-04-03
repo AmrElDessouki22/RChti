@@ -1,14 +1,10 @@
-const logout = document.getElementById('logout')
-const name = document.getElementById('swe')
+
+
 const avarge_request = document.getElementById('avarge_request')
 const name_request = document.getElementById('name_request')
 const phone_request = document.getElementById('phone_request')
 const sendrequest = document.getElementById('sendrequest')
 const erorrsubmint = document.getElementById('erorrsubmint')
-const image_error = document.getElementById('error')
-const url = 'https://rchti.herokuapp.com'
-const urlpro = 'https://rchti.herokuapp.com'
-const setimage = document.getElementById('setimagei')
 var formData = new FormData();
 var _id = ''
 var date = new Date()
@@ -22,7 +18,6 @@ checkuser(urlpro+'/checkuser').then((data)=>
             data.json().then((data)=>
             {
                 name_request.value=data.name
-                name.innerHTML = data.username
                 _id = data._id
                 if(data.avatar){
                     setimage.src=urlpro+'/avatar/'+_id
@@ -71,14 +66,7 @@ function sendrequest_(){
     
 
 }
-async function logout_(url)
-{
-    const response = await fetch(url,{
-        method:'POST',
-        headers: {'Content-Type': 'application/json','Authorization':'Bearer '+document.cookie.split('=')[1]}
-    })
-    return response
-}
+
 async function checkuser(url){
     const response = await fetch(url, {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -97,13 +85,15 @@ async function sendrequestfetch(url,body)
     
     if(response.status== 200)
     {
+        console.log('33');
+        
         return location.href = 'welcome'
       
     }
     const error = await response.text()
     
     
-    return erorrsubmint.innerHTML= error
+    return alert(error)
 }
 async function getphoto(url){
     const response = await fetch(url,{

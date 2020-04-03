@@ -1,9 +1,8 @@
 const login = document.getElementById('login')
 const id = document.getElementById('ID')
 const password = document.getElementById('password')
-const loginvald = document.getElementById('loginvald')
 const url = 'http://localhost:3000'
-const urlpro = 'https://rchti.herokuapp.com'
+const urlpro = 'http://localhost:3000'
 
 checkuser(urlpro+'/checkuserworker',document.cookie.split('=')[1])
 login.addEventListener('click',myFunction)
@@ -30,7 +29,7 @@ async function checklogin(url,body)
         }  
 
     const error = await response.text()
-    return loginvald.innerHTML = error    
+    return alert(error)  
 
     
     

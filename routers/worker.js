@@ -316,6 +316,50 @@ app.post('/addpoints/:id',authworker,async(req,res)=>
     res.send(error.message)
 
 })
+app.get('/donerequestworker',authworker,async(req,res)=>
+{
+   
+    
+    try{
+        const request = await requestes.find({worker:req.worker._id,done:true})
+        
+        if(request == [])
+        {
+            console.log(request);
+            
+            return res.status(404).send('not found done request')
+        }
+        res.status(200).send(request)
+
+    }catch(e)
+    {
+        res.status(404).send(e.message)
+    }
+},(error,res,next)=>
+{
+    res.send(error.message)
+
+})
+app.post('/getinfouser',authworker,async(req,res)=>
+{
+    
+    try{
+        const dones = await user.findById(req.body.owner)
+        if(!dones)
+        {
+            return res.send(400).send('cant found  user')
+        }
+        return res.status(200).send(dones)
+    }catch(e)
+    {
+        
+        res.status(404).send(e.message)
+    }
+},(error,res,next)=>
+{
+    res.status(404).send('hala')
+
+})
 app.get('/worker',(req,res)=>
 {
     res.render('workerLogin')
@@ -336,5 +380,9 @@ app.get('/workerproccessreq',(req,res)=>
 app.get('/doneform',(req,res)=>
 {
     res.render('doneform')
+})
+app.get('/doneworker',(req,res)=>
+{
+    res.render('donepageworker')
 })
 module.exports = app
