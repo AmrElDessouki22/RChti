@@ -2,8 +2,8 @@ const logout = document.getElementById('logout')
 const name_ = document.getElementById('name')
 const phone = document.getElementById('phone')
 const image = document.getElementById('image')
-const url = 'http://localhost:3000'
-const urlpro = 'http://localhost:3000'
+const url = 'https://rchti.herokuapp.com'
+const urlpro = 'https://rchti.herokuapp.com'
 const setimage = document.getElementById('setimagei')
 const setimage2 = document.getElementById('setimagei2')
 const setimage3 = document.getElementById('setimagei3')
@@ -24,6 +24,7 @@ function handleFiles() {
    
 
 }
+console.log('sadsada');
 
 checkuser(urlpro+'/checkuser')
 logout.addEventListener('click',myFunction)
