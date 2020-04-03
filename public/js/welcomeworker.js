@@ -1,7 +1,7 @@
 const logout = document.getElementById('logout')
 const name_ = document.getElementById('name')
 const image = document.getElementById('image')
-const url = 'http://rchti.herokuapp.com/'
+const url = 'http://rchti.herokuapp.com'
 const urlpro = 'http://rchti.herokuapp.com'
 const setimage = document.getElementById('setimagei')
 var formData = new FormData();
