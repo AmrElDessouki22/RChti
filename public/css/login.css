@@ -42,7 +42,37 @@ form input[type=text]
   border-bottom: 1px solid #008000 ;
   display: block;
 }
+form input[type=password]
+{
+  font-family: 'Lalezar', cursive;
+  font-size: 20px;
+  width: 50%;
+  margin: 3% auto;
+  color: #008000;
+  border: none;
+  border-bottom: 1px solid #008000 ;
+  display: block;
+}
+form input[type=email]
+{
+  font-family: 'Lalezar', cursive;
+  font-size: 20px;
+  width: 50%;
+  margin: 3% auto;
+  color: #008000;
+  border: none;
+  border-bottom: 1px solid #008000 ;
+  display: block;
+}
 form input[type=text]::placeholder
+{
+  color: #008000;
+}
+form input[type=email]::placeholder
+{
+  color: #008000;
+}
+form input[type=password]::placeholder
 {
   color: #008000;
 }

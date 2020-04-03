@@ -42,11 +42,11 @@ form input[type=text]
   border-bottom: 1px solid #008000 ;
   display: block;
 }
-form input[type=text]::placeholder
+form input[type=text]::placeholder,input[type=email]::placeholder,input[type=password]::placeholder
 {
   color: #008000;
 }
-form input[type=button]
+form input[type=button],input[type=password],input[type=email]
 {
   font-family: 'Lalezar', cursive;
   font-size: 20px;

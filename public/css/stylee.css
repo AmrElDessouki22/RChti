@@ -49,7 +49,7 @@ form input{
 .input-line{
 
 }
-form input[type=text],input[type=number]
+form input[type=text],input[type=number],input[type=email],input[type=password]
 {
   margin: 5% auto;
   font-size: 20px;
@@ -61,7 +61,7 @@ form input[type=text],input[type=number]
   border-color: #008000;
   color: #008000;
 }
-form input[type=text]::placeholder,input[type=number]::placeholder
+form input[type=text]::placeholder,input[type=number]::placeholder,input[type=email]::placeholder,input[type=password]::placeholder
 {
   color:  #008000;
 }
