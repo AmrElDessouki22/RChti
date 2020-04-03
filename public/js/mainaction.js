@@ -7,7 +7,7 @@ const username = document.getElementById("username")
 const name = document.getElementById("name")
 const phonee = document.getElementById("phone")
 const url = 'https://rchti.herokuapp.com'
-const urlpro = 'http://localhost:3000'
+const urlpro = 'https://rchti.herokuapp.com'
 console.log(document.cookie.split('=')[1]);
 
 checkuser(urlpro+'/checkuser',document.cookie.split('=')[1])
