@@ -1,8 +1,8 @@
 const logout = document.getElementById('logout')
 const name_ = document.getElementById('name')
 const image = document.getElementById('image')
-const url = 'https://rchti.herokuapp.com'
-const urlpro = 'https://rchti.herokuapp.com'
+const url = 'http://localhost:3000'
+const urlpro = 'http://localhost:3000'
 const setimage = document.getElementById('setimagei')
 var formData = new FormData();
 var _id = ''
@@ -51,7 +51,7 @@ async function checkuser(url){
         if(jsonres.avatar){
             //http://localhost:3000
             //https://rchti.herokuapp.com
-            url='https://rchti.herokuapp.com'
+            url='http://localhost:3000'
             setimage.src=url+'/avatarworker/'+_id
             console.log(url+'/avatarworker/'+_id);
             

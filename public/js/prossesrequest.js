@@ -5,7 +5,6 @@ const colorlib = document.getElementById('sectianola')
 const h1Color = 'style="color: white;"'
 var imageop;
 var name_oo;
-console.log(urlpro);
 checkuser(urlpro+'/checkuser')
 async function checkuser(url){
     const response = await fetch(url, {
@@ -47,6 +46,7 @@ async function checkuser(url){
 
     async function getrequestsx(url,imgy,name_)
     {
+        console.log('hgy1');
         const response = await fetch(url,{
             method:'GET',
             headers: {'Content-Type': 'application/json','Authorization':'Bearer '+document.cookie.split('=')[1]}
@@ -54,21 +54,21 @@ async function checkuser(url){
         })
         if(response.status == 200)
         { 
-            return setrequesth(await response.json(),imgy,name_)
+            console.log('hgy3');
+            
+            return await setrequesth(await response.json(),imgy,name_)
         }
-
+        console.log('hgy2');
         return alert(await response.text())
         
     }
    
      async function setrequesth(json,imgy,name_){
-         console.log(json);
          var IMAGO = 'src='+imgy;
         
         for (var I = 0; I < json.length; I++)
         { 
-            console.log('i');
-            
+           
             var d = new Date(json[I].createdAt);
             var u ;
             var worker             
