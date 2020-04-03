@@ -1,8 +1,8 @@
 const login = document.getElementById('login')
 const id = document.getElementById('ID')
 const password = document.getElementById('password')
-const url = 'http://localhost:3000'
-const urlpro = 'http://localhost:3000'
+const url = 'https://rchti.herokuapp.com'
+const urlpro = 'https://rchti.herokuapp.com'
 
 checkuser(urlpro+'/checkuserworker',document.cookie.split('=')[1])
 login.addEventListener('click',myFunction)
