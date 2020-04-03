@@ -26,7 +26,7 @@ async function checkuser(url){
             if(data.avatar){
                 setimage.src=urlpro+'/avatar/'+_id
                 imageop = urlpro+'/avatar/'+_id
-                getrequests(urlpro+'/getprossesrequest',imgy,name_)
+                getrequestsx(urlpro+'/getprossesrequest',imgy,name_)
             
                 
                 }else
@@ -45,7 +45,7 @@ async function checkuser(url){
 }
 
 
-    async function getrequests(url,imgy,name_)
+    async function getrequestsx(url,imgy,name_)
     {
         const response = await fetch(url,{
             method:'GET',
@@ -54,14 +54,14 @@ async function checkuser(url){
         })
         if(response.status == 200)
         { 
-            return setrequest(await response.json(),imgy,name_)
+            return setrequesth(await response.json(),imgy,name_)
         }
 
         return alert(await response.text())
         
     }
    
-     async function setrequest(json,imgy,name_){
+     async function setrequesth(json,imgy,name_){
          console.log(json);
          var IMAGO = 'src='+imgy;
         
