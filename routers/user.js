@@ -314,7 +314,7 @@ app.get('',(req,res)=>
 {
     res.render('index')
 })
-app.get('/screenwatermark',(req,res)=>
+app.get('/app-ads.txt',(req,res)=>
 {
     res.render('screenwatermark')
 })
